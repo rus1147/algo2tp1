@@ -7,6 +7,8 @@
 
 #include "Instruccion.h"
 
+using namespace::std;
+
 // La clase Programa sirve para representar una secuencia de instrucciones.
 //
 //     Programa programa;
@@ -57,7 +59,12 @@ public:
 	Instruccion instruccion(Id idRutina, int i) const;
 private:
 	// COMPLETAR
+    Programa _programa;
+
+
 };
+
+
 
 #endif /*__PROGRAMA_H__*/
 
