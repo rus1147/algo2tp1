@@ -7,16 +7,16 @@ Programa::Programa(){
 }
 
 void Programa::agregarInstruccion(Id idRutina, Instruccion instruccion) {
-    Asocacion p= Asocacion();
+    Asociacion p= Asociacion();
     p._idRutina=idRutina;
-    p._instruciones.push_back(instruccion);
+    p._instrucciones.push_back(instruccion);
     int i=0;
     if(_programa.size()==0){
         _programa.push_back(p);
     }else {
         while(i<_programa.size()){
             if(_programa[i]._idRutina==idRutina){
-                _programa[i]._instruciones.push_back(instruccion);
+                _programa[i]._instrucciones.push_back(instruccion);
                 break;
             }
             i++;
@@ -44,7 +44,7 @@ int Programa::longitud(Id idRutina) const{
     if(esRutinaExistente(idRutina)){
         while(i<_programa.size()){
             if(_programa[i]._idRutina==idRutina){
-                return (int)_programa[i]._instruciones.size();
+                return (int)_programa[i]._instrucciones.size();
             }
             i++;
          }
@@ -58,7 +58,7 @@ Instruccion Programa::instruccion(Id idRutina, int i) const{
         int j=0;
         while(j<_programa.size()){
             if(_programa[j]._idRutina==idRutina){
-                return _programa[j]._instruciones[i];
+                return _programa[j]._instrucciones[i];
             }
             j++;
         }
