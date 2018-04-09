@@ -66,5 +66,5 @@ TEST(test_programa, dosRutinas) {
     EXPECT_EQ(p.instruccion("B", 0).nombre(), "b");
     EXPECT_EQ(p.instruccion("B", 1).operacion(), JUMPZ);
     EXPECT_EQ(p.instruccion("B", 1).nombre(), "d");
+    
 }
-

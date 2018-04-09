@@ -58,13 +58,12 @@ public:
 	//   esRutinaExistente(idRutina) && 0 <= i && i < longitud(idRutina)
 	Instruccion instruccion(Id idRutina, int i) const;
 private:
-	// COMPLETAR
-    Programa _programa;
-
-
+	struct Asocacion{
+		Id _idRutina;
+		vector<Instruccion> _instruciones;
+	};
+	vector<Asocacion> _programa;
 };
-
-
 
 #endif /*__PROGRAMA_H__*/
 
