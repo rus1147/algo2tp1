@@ -71,6 +71,33 @@ private:
             pila.push(n*m);
         }
     }
+
+    void write(Id idVariable){
+
+        for(int i = 0; i < _memoria.size(); i++){
+            if(_memoria[i]._idVariable == idVariable){
+                if(pila.empty()){
+                    _memoria[i]._valor = 0;
+                    break;
+                } else {
+                    _memoria[i]._valor = pila.top();
+                    pila.pop();
+                    break;
+                }
+            }
+        }
+    }
+
+    void READ(Id idVariable){
+        for(int i = 0; i < _memoria.size(); i++){
+            if(_memoria[i]._idVariable == idVariable){
+                pila.push(_memoria[i]._valor);
+                break;
+            }
+        }
+        pila.push(0);
+    }
+
 };
 
 
