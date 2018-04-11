@@ -1,6 +1,8 @@
 #ifndef __CALCULADORA_H__
 #define __CALCULADORA_H__
 
+#include <iostream>
+#include <vector>
 #include "Programa.h"
 #include <stack>
 
@@ -24,10 +26,12 @@ private:
 
     stack<int> pila;
 
-    Programa _programa;
+    Programa _programa; //@rus:creo que no va porque lo sacamos de la clase programa.
 
 
     //las operaciones van acá??
+    //@rus: Las que implementemos(que no fueron soliciadas), osea, las aux.
+    //@rus: segun el enunciado van en la parte privada. Asi que si.
     void push(int n){
         pila.push(n);
     }
@@ -67,10 +71,9 @@ private:
             pila.push(n*m);
         }
     }
-
 };
 
 
 
 
-#endif //__CALCULADORA_H__
+#endif /*__CALCULADORA_H__*/

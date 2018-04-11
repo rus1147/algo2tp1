@@ -2,7 +2,10 @@
 
 using namespace::std;
 
-Calculadora::Calculadora(Programa programa): _programa(programa){};
+Calculadora::Calculadora(Programa programa){
+    _programa; //@rus:creo que esta mal, porque esta pasando el programa, pero constuye la calculadora?
+}
+
 
 void Calculadora::asignarVariable(Id idVariable, int valor){
     //lo hice pensando que la variable podría ya existir
