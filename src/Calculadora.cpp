@@ -13,22 +13,38 @@ void Calculadora::asignarVariable(Id idVariable, int valor){
     v._idVariable = idVariable;
     v._valor = valor;
     int i = 0;
-    while (i < _memoria.size()){
-        if (_memoria[i]._idVariable == idVariable){
-            _memoria[i]._valor = valor;
+    while (i < memoria.size()){
+        if (memoria[i]._idVariable == idVariable){
+            memoria[i]._valor = valor;
             break;
         }
         i++;
     }
-    _memoria.push_back(v);
+    memoria.push_back(v);
 }
 
-void Calculadora::ejecutar(Id idRutina){}
+/* dejo la idea porque me tira errores con _programa
+ *
+void Calculadora::ejecutar(Id idRutina){
+    if(_programa.esRutinaExistente(idRutina)){
+        int i = 0;
+        while(i < _programa.size()){
+            if(_programa[i]._idRutina == idRutina){
+                for(int j = 0; j < _programa[i]._instrucciones.size(); j++){
+                    _programa[i]._instrucciones[j];
+                }
+            }
+            i++;
+        }
+    } else {
+        //cómo termina una ejecución?
+    }
+} */
 
 int Calculadora::valorVariable(Id idVariable) const {
-    for (int i = 0; i < _memoria.size(); i++) {
-        if (_memoria[i]._idVariable == idVariable) {
-            return _memoria[i]._valor;
+    for (int i = 0; i < memoria.size(); i++) {
+        if (memoria[i]._idVariable == idVariable) {
+            return memoria[i]._valor;
         }
     }
     return 0;

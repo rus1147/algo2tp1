@@ -4,7 +4,6 @@
 #include <iostream>
 #include <vector>
 #include "Programa.h"
-#include <stack>
 
 
 class Calculadora {
@@ -22,9 +21,9 @@ private:
         Id _idVariable;
         int _valor;
     };
-    vector<Variables> _memoria;
+    vector<Variables> memoria;
 
-    stack<int> pila;
+    vector<int> pila;
 
     Programa _programa; //@rus:creo que no va porque lo sacamos de la clase programa.
 
@@ -33,55 +32,58 @@ private:
     //@rus: Las que implementemos(que no fueron soliciadas), osea, las aux.
     //@rus: segun el enunciado van en la parte privada. Asi que si.
     void push(int n){
-        pila.push(n);
+        pila.push_back(n);
     }
 
-    void add(){
+    void ADD(){
+        int topPila = pila[pila.size()];
         if (pila.empty()){
-            pila.push(0);
+            pila.push_back(0);
         } else if (pila.size() > 1){
-            int n = pila.top();
-            pila.pop();
-            int m = pila.top();
-            pila.pop();
-            pila.push(n+m);
+            int n = topPila;
+            pila.pop_back();
+            int m = topPila;
+            pila.pop_back();
+            pila.push_back(n+m);
         }
     }
 
-    void sub(){
+    void SUB(){
+        int topPila = pila[pila.size()];
         if (pila.empty()){
-            pila.push(0);
+            pila.push_back(0);
         } else if (pila.size() > 1){
-            int n = pila.top();
-            pila.pop();
-            int m = pila.top();
-            pila.pop();
-            pila.push(abs(n-m));
+            int n = topPila;
+            pila.pop_back();
+            int m = topPila;
+            pila.pop_back();
+            pila.push_back(abs(n-m));
         }
     }
 
-    void mul(){
+    void MUL(){
+        int topPila = pila[pila.size()];
         if (pila.empty()){
-            pila.push(0);
+            pila.push_back(0);
         } else if (pila.size() > 1){  //no sé bien qué pasa si sólo hay un elemento
-            int n = pila.top();
-            pila.pop();
-            int m = pila.top();
-            pila.pop();
-            pila.push(n*m);
+            int n = topPila;
+            pila.pop_back();
+            int m = topPila;
+            pila.pop_back();
+            pila.push_back(n*m);
         }
     }
 
-    void write(Id idVariable){
+    void WRITE(Id idVariable){
 
-        for(int i = 0; i < _memoria.size(); i++){
-            if(_memoria[i]._idVariable == idVariable){
+        for(int i = 0; i < memoria.size(); i++){
+            if(memoria[i]._idVariable == idVariable){
                 if(pila.empty()){
-                    _memoria[i]._valor = 0;
+                    memoria[i]._valor = 0;
                     break;
                 } else {
-                    _memoria[i]._valor = pila.top();
-                    pila.pop();
+                    memoria[i]._valor = pila[pila.size()];;
+                    pila.pop_back();
                     break;
                 }
             }
@@ -89,13 +91,32 @@ private:
     }
 
     void READ(Id idVariable){
-        for(int i = 0; i < _memoria.size(); i++){
-            if(_memoria[i]._idVariable == idVariable){
-                pila.push(_memoria[i]._valor);
+        for(int i = 0; i < memoria.size(); i++){
+            if(memoria[i]._idVariable == idVariable){
+                pila.push_back(memoria[i]._valor);
                 break;
             }
         }
-        pila.push(0);
+        pila.push_back(0);
+    }
+
+    void JUMP(Id idRutina){
+        if(_programa.esRutinaExistente(idRutina)){
+            ejecutar(idRutina);
+        } else {
+            //??
+        }
+    }
+
+    void JUMPZ(Id idRutina){
+        int pilaTop = pila[pila.size()];
+        if(_programa.esRutinaExistente(idRutina)){
+            if (pilaTop == 0 or pila.empty()){
+                ejecutar(idRutina);
+            }
+        } else {
+            //??
+        }
     }
 
 };

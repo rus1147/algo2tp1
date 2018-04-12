@@ -7,7 +7,7 @@ Programa::Programa(){
 }
 
 void Programa::agregarInstruccion(Id idRutina, Instruccion instruccion) {
-    Asociacion p= Asociacion();
+    Rutinas p= Rutinas();
     p._idRutina=idRutina;
     p._instrucciones.push_back(instruccion);
     int i=0;

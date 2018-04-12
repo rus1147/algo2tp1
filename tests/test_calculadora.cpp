@@ -15,3 +15,21 @@ TEST(test_calculadora, ejemploDePrueba) {
     c.ejecutar("MAIN");
     EXPECT_EQ(c.valorVariable("x"),42);
 }
+
+TEST(test_calculadora, mulSub) {
+    Programa p;
+    p.agregarInstruccion("A", Instruccion(PUSH, 5));
+    p.agregarInstruccion("A", Instruccion(MUL));
+    p.agregarInstruccion("A", Instruccion(WRITE, "x"));
+    p.agregarInstruccion("A", Instruccion(READ, "x"));
+    Calculadora c(p);
+    c.ejecutar("A");
+    EXPECT_EQ(c.valorVariable("x"), 5);
+    p.agregarInstruccion("A", Instruccion(PUSH, 2));
+    p.agregarInstruccion("A", Instruccion(MUL));
+    p.agregarInstruccion("A", Instruccion(PUSH, 3));
+    p.agregarInstruccion("A", Instruccion(SUB));
+    p.agregarInstruccion("A", Instruccion(WRITE, "x"));
+    c.ejecutar("A");
+    EXPECT_EQ(c.valorVariable("x"), 7);
+}
