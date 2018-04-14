@@ -2,9 +2,7 @@
 
 using namespace::std;
 
-Calculadora::Calculadora(Programa programa){
-    _programa; //@rus:creo que esta mal, porque esta pasando el programa, pero constuye la calculadora?
-}
+Calculadora::Calculadora(Programa programa) : _programa(programa) {}; //@rus:creo que esta mal, porque esta pasando el programa, pero constuye la calculadora?
 
 
 void Calculadora::asignarVariable(Id idVariable, int valor){
@@ -23,23 +21,16 @@ void Calculadora::asignarVariable(Id idVariable, int valor){
     memoria.push_back(v);
 }
 
-/* dejo la idea porque me tira errores con _programa
- *
 void Calculadora::ejecutar(Id idRutina){
     if(_programa.esRutinaExistente(idRutina)){
         int i = 0;
-        while(i < _programa.size()){
-            if(_programa[i]._idRutina == idRutina){
-                for(int j = 0; j < _programa[i]._instrucciones.size(); j++){
-                    _programa[i]._instrucciones[j];
-                }
-            }
+        while(i < _programa.longitud(idRutina)){
+            _programa.instruccion(idRutina, i);
             i++;
-        }
-    } else {
-        //cómo termina una ejecución?
+            }
     }
-} */
+}
+
 
 int Calculadora::valorVariable(Id idVariable) const {
     for (int i = 0; i < memoria.size(); i++) {
