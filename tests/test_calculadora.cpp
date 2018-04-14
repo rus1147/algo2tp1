@@ -52,6 +52,7 @@ TEST(test_calculadora, jumpRutinaNoExistente){
     p.agregarInstruccion("R", Instruccion(READ, "y"));
     p.agregarInstruccion("R", Instruccion(PUSH, 7));
     p.agregarInstruccion("R", Instruccion(SUB));
+    p.agregarInstruccion("R", Instruccion(WRITE, "y"));
     p.agregarInstruccion("R", Instruccion(JUMP, "N"));
     Calculadora c(p);
     c.asignarVariable("y", 11);
