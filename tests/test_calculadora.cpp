@@ -82,3 +82,23 @@ TEST(test_calculadora, jumpz){
     c.ejecutar("A");
     EXPECT_EQ(c.valorVariable("x"), 26);
 }
+
+TEST(test_calculadora, readYJumpz){
+    Programa p;
+    p.agregarInstruccion("A", Instruccion(PUSH, 10));
+    p.agregarInstruccion("A", Instruccion(READ, "x"));
+    p.agregarInstruccion("A", Instruccion(PUSH, 20));
+    p.agregarInstruccion("A", Instruccion(ADD));
+    p.agregarInstruccion("A", Instruccion(WRITE, "y"));
+    p.agregarInstruccion("A", Instruccion(READ, "y"));
+    p.agregarInstruccion("A", Instruccion(PUSH, 2));
+    p.agregarInstruccion("A", Instruccion(MUL));
+    p.agregarInstruccion("A", Instruccion(WRITE, "x"));
+    p.agregarInstruccion("A", Instruccion(JUMPZ, "B"));
+    p.agregarInstruccion("B", Instruccion(WRITE, "y"));
+    Calculadora c(p);
+    c.asignarVariable("x", 30);
+    c.ejecutar("A");
+    EXPECT_EQ(c.valorVariable("x"), 100);
+    EXPECT_EQ(c.valorVariable("y"), 50);
+}
