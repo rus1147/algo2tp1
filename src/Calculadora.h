@@ -52,7 +52,7 @@ private:
             pila.pop_back();
             int m = pila[pila.size()-1];
             pila.pop_back();
-            pila.push_back(abs(n-m));
+            pila.push_back(m-n);
         }
     }
 
