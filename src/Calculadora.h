@@ -114,12 +114,10 @@ private:
 
     void JUMPZ(Id idRutina){
         int pilaTop = pila[pila.size()];
-        if(_programa.esRutinaExistente(idRutina)){
             if(pilaTop == 0 or pila.empty()){
                 ejecutar(idRutina);
             }
         }
-    }
 
 };
 

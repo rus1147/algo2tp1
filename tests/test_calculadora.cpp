@@ -135,5 +135,5 @@ TEST(test_calculadora, saltoHastaJumpzNIgualA0) {
     c.asignarVariable("x", 0);
     c.ejecutar("A");
     c.ejecutar("A"); //
-    EXPECT_EQ(c.valorVariable("x"), 0);
+    EXPECT_EQ(c.valorVariable("x"), -2);
 }
