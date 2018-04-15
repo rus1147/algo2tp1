@@ -73,8 +73,8 @@ private:
     }
 
     void WRITE(Id idVariable){
-
-        for(int i = 0; i < memoria.size(); i++){
+        int i = 0;
+        while(i < memoria.size()){
             if(memoria[i]._idVariable == idVariable){
                 if(pila.empty()){
                     memoria[i]._valor = 0;
@@ -85,6 +85,14 @@ private:
                     break;
                 }
             }
+            i++;
+        }
+        if (i == memoria.size()){
+            Variables var = Variables();
+            var._idVariable = idVariable;
+            var._valor = pila[pila.size()-1];
+            memoria.push_back(var);
+            pila.pop_back();
         }
     }
 

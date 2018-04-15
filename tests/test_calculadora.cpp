@@ -22,16 +22,13 @@ TEST(test_calculadora, mulSub) {
     p.agregarInstruccion("A", Instruccion(MUL));
     p.agregarInstruccion("A", Instruccion(WRITE, "x"));
     p.agregarInstruccion("A", Instruccion(READ, "x"));
+    p.agregarInstruccion("A", Instruccion(PUSH, 2));
+    p.agregarInstruccion("A", Instruccion(SUB));
+    p.agregarInstruccion("A", Instruccion(WRITE, "y"));
     Calculadora c(p);
     c.ejecutar("A");
     EXPECT_EQ(c.valorVariable("x"), 5);
-    p.agregarInstruccion("A", Instruccion(PUSH, 2));
-    p.agregarInstruccion("A", Instruccion(MUL));
-    p.agregarInstruccion("A", Instruccion(PUSH, 3));
-    p.agregarInstruccion("A", Instruccion(SUB));
-    p.agregarInstruccion("A", Instruccion(WRITE, "x"));
-    c.ejecutar("A");
-    EXPECT_EQ(c.valorVariable("x"), 7);
+    EXPECT_EQ(c.valorVariable("y"), 3);
 }
 
 TEST(test_calculadora, dosRutinas) {
@@ -56,5 +53,6 @@ TEST(test_calculadora, jumpRutinaNoExistente){
     p.agregarInstruccion("R", Instruccion(JUMP, "N"));
     Calculadora c(p);
     c.asignarVariable("y", 11);
+    c.ejecutar("R");
     EXPECT_EQ(c.valorVariable("y"), 4);
 }
