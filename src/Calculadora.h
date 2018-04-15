@@ -37,39 +37,36 @@ private:
     }
 
     void ADD(){
-        int topPila = pila[pila.size()];
         if (pila.empty()){
             pila.push_back(0);
         } else if (pila.size() > 1){
-            int n = topPila;
+            int n = pila[pila.size()-1];
             pila.pop_back();
-            int m = topPila;
+            int m = pila[pila.size()-1];
             pila.pop_back();
             pila.push_back(n+m);
         }
     }
 
     void SUB(){
-        int topPila = pila[pila.size()];
         if (pila.empty()){
             pila.push_back(0);
         } else if (pila.size() > 1){
-            int n = topPila;
+            int n = pila[pila.size()-1];
             pila.pop_back();
-            int m = topPila;
+            int m = pila[pila.size()-1];
             pila.pop_back();
             pila.push_back(abs(n-m));
         }
     }
 
     void MUL(){
-        int topPila = pila[pila.size()];
         if (pila.empty()){
             pila.push_back(0);
-        } else if (pila.size() > 1){  //no sé bien qué pasa si sólo hay un elemento
-            int n = topPila;
+        } else if (pila.size() > 1){
+            int n = pila[pila.size()-1];
             pila.pop_back();
-            int m = topPila;
+            int m = pila[pila.size()-1];
             pila.pop_back();
             pila.push_back(n*m);
         }
@@ -83,7 +80,7 @@ private:
                     memoria[i]._valor = 0;
                     break;
                 } else {
-                    memoria[i]._valor = pila[pila.size()];;
+                    memoria[i]._valor = pila[pila.size()-1];;
                     pila.pop_back();
                     break;
                 }
@@ -92,13 +89,17 @@ private:
     }
 
     void READ(Id idVariable){
-        for(int i = 0; i < memoria.size(); i++){
+        int i = 0;
+        while(i < memoria.size()){
             if(memoria[i]._idVariable == idVariable){
                 pila.push_back(memoria[i]._valor);
                 break;
             }
+            i++;
         }
-        pila.push_back(0);
+        if (i == memoria.size()){
+            pila.push_back(0);
+        }
     }
 
     void JUMP(Id idRutina){

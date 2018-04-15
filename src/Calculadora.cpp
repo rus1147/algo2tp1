@@ -24,8 +24,27 @@ void Calculadora::asignarVariable(Id idVariable, int valor){
 void Calculadora::ejecutar(Id idRutina){
     if(_programa.esRutinaExistente(idRutina)){
         int i = 0;
+
         while(i < _programa.longitud(idRutina)){
-            _programa.instruccion(idRutina, i);
+            Instruccion h = _programa.instruccion(idRutina, i);
+            Id v = h.nombre();
+            if (h.operacion() == 1){
+                PUSH(h.valor());
+            } else if (h.operacion() == 2){
+                ADD();
+            } else if (h.operacion() == 3){
+                SUB();
+            } else if(h.operacion() == 4){
+                MUL();
+            } else if (h.operacion() == 5){
+                WRITE(v);
+            } else if (h.operacion() == 6){
+                READ(v);
+            } else if (h.operacion() == 7){
+                JUMP(v);
+            } else if (h.operacion() == 8){
+                JUMPZ(v);
+            }
             i++;
             }
     }
