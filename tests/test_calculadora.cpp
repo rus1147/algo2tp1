@@ -37,11 +37,14 @@ TEST(test_calculadora, dosRutinas) {
     p.agregarInstruccion("A", Instruccion(PUSH, 8));
     p.agregarInstruccion("A", Instruccion(ADD));
     p.agregarInstruccion("A", Instruccion(WRITE, "x"));
+    p.agregarInstruccion("A", Instruccion(READ, "x"));
     p.agregarInstruccion("A", Instruccion(JUMP, "B"));
+    p.agregarInstruccion("B", Instruccion(PUSH, 2));
     p.agregarInstruccion("B", Instruccion(SUB));
+    p.agregarInstruccion("B", Instruccion(WRITE, "x"));
     Calculadora c(p);
     c.ejecutar("A");
-    EXPECT_EQ(c.valorVariable("x"), 10);
+    EXPECT_EQ(c.valorVariable("x"), 8);
 }
 
 TEST(test_calculadora, jumpRutinaNoExistente){
@@ -51,8 +54,31 @@ TEST(test_calculadora, jumpRutinaNoExistente){
     p.agregarInstruccion("R", Instruccion(SUB));
     p.agregarInstruccion("R", Instruccion(WRITE, "y"));
     p.agregarInstruccion("R", Instruccion(JUMP, "N"));
+    p.agregarInstruccion("R", Instruccion(PUSH, 5));
+    p.agregarInstruccion("R", Instruccion(MUL));
+    p.agregarInstruccion("R", Instruccion(WRITE, "y"));
     Calculadora c(p);
     c.asignarVariable("y", 11);
     c.ejecutar("R");
     EXPECT_EQ(c.valorVariable("y"), 4);
+}
+
+TEST(test_calculadora, jumpz){
+    Programa p;
+    p.agregarInstruccion("A", Instruccion(READ, "x"));
+    p.agregarInstruccion("A", Instruccion(PUSH, 2));
+    p.agregarInstruccion("A", Instruccion(MUL));
+    p.agregarInstruccion("A", Instruccion(WRITE, "x"));
+    p.agregarInstruccion("A", Instruccion(JUMPZ, "B"));
+    p.agregarInstruccion("A", Instruccion(WRITE, "x"));
+    p.agregarInstruccion("B", Instruccion(READ, "x"));
+    p.agregarInstruccion("B", Instruccion(PUSH, 2));
+    p.agregarInstruccion("B", Instruccion(ADD));
+    p.agregarInstruccion("B", Instruccion(WRITE, "x"));
+    Calculadora c(p);
+    c.asignarVariable("x", 5);
+    c.ejecutar("A");
+    EXPECT_EQ(c.valorVariable("x"), 12);
+    c.ejecutar("A");
+    EXPECT_EQ(c.valorVariable("x"), 26);
 }

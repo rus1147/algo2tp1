@@ -2,7 +2,7 @@
 
 using namespace::std;
 
-Calculadora::Calculadora(Programa programa) : _programa(programa) {}; //@rus:creo que esta mal, porque esta pasando el programa, pero constuye la calculadora?
+Calculadora::Calculadora(Programa programa) : _programa(programa) {};
 
 
 void Calculadora::asignarVariable(Id idVariable, int valor){
@@ -24,8 +24,8 @@ void Calculadora::asignarVariable(Id idVariable, int valor){
 void Calculadora::ejecutar(Id idRutina){
     if(_programa.esRutinaExistente(idRutina)){
         int i = 0;
-
         while(i < _programa.longitud(idRutina)){
+
             Instruccion h = _programa.instruccion(idRutina, i);
             Id v = h.nombre();
             if (h.operacion() == 1){
@@ -41,12 +41,16 @@ void Calculadora::ejecutar(Id idRutina){
             } else if (h.operacion() == 6){
                 READ(v);
             } else if (h.operacion() == 7){
+                //aumento el índice: si la rutina no existe, sale del ciclo y termina la ejecución
+                i = _programa.longitud(idRutina)+1;
                 JUMP(v);
             } else if (h.operacion() == 8){
+                i = _programa.longitud(idRutina)+1;
                 JUMPZ(v);
             }
             i++;
-            }
+
+        }
     }
 }
 
