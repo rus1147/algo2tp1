@@ -83,7 +83,7 @@ TEST(test_calculadora, jumpz){
     EXPECT_EQ(c.valorVariable("x"), 26);
 }
 
-TEST(test_calculadora, readYJumpz){
+TEST(test_calculadora, readYJumpz) {
     Programa p;
     p.agregarInstruccion("A", Instruccion(PUSH, 10));
     p.agregarInstruccion("A", Instruccion(READ, "x"));
@@ -101,4 +101,35 @@ TEST(test_calculadora, readYJumpz){
     c.ejecutar("A");
     EXPECT_EQ(c.valorVariable("x"), 100);
     EXPECT_EQ(c.valorVariable("y"), 50);
+}
+TEST(test_calculadora, saltoHastaJumpz) {
+    Programa p;
+    p.agregarInstruccion("A", Instruccion(READ, "x"));
+    p.agregarInstruccion("A", Instruccion(PUSH, 1));
+    p.agregarInstruccion("A", Instruccion(SUB));
+    p.agregarInstruccion("A", Instruccion(WRITE, "x"));
+    p.agregarInstruccion("A", Instruccion(READ, "x"));
+    p.agregarInstruccion("A", Instruccion(JUMPZ, "FIN"));
+    p.agregarInstruccion("A", Instruccion(JUMP, "A"));
+    Calculadora c(p);
+    c.asignarVariable("x", 2);
+    c.ejecutar("A");
+    EXPECT_EQ(c.valorVariable("x"), 1);
+    c.ejecutar("A");
+    EXPECT_EQ(c.valorVariable("x"), 0);
+}
+TEST(test_calculadora, saltoHastaJumpzNIgualA0) {
+    Programa p;
+    p.agregarInstruccion("A", Instruccion(READ, "x"));
+    p.agregarInstruccion("A", Instruccion(PUSH, 1));
+    p.agregarInstruccion("A", Instruccion(SUB));
+    p.agregarInstruccion("A", Instruccion(WRITE, "x"));
+    p.agregarInstruccion("A", Instruccion(READ, "x"));
+    p.agregarInstruccion("A", Instruccion(JUMPZ, "FIN"));
+    p.agregarInstruccion("A", Instruccion(JUMP, "A"));
+    Calculadora c(p);
+    c.asignarVariable("x", 0);
+    c.ejecutar("A");
+    c.ejecutar("A"); //
+    EXPECT_EQ(c.valorVariable("x"), 0);
 }

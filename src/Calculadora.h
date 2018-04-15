@@ -26,12 +26,8 @@ private:
 
     vector<int> pila;
 
-    Programa _programa; //@rus:creo que no va porque lo sacamos de la clase programa.
-
-
-    //las operaciones van acá??
-    //@rus: Las que implementemos(que no fueron soliciadas), osea, las aux.
-    //@rus: segun el enunciado van en la parte privada. Asi que si.
+    Programa _programa;
+    
     void PUSH(int n){
         pila.push_back(n);
     }

@@ -25,7 +25,6 @@ void Calculadora::ejecutar(Id idRutina){
     if(_programa.esRutinaExistente(idRutina)){
         int i = 0;
         while(i < _programa.longitud(idRutina)){
-
             Instruccion h = _programa.instruccion(idRutina, i);
             Id v = h.nombre();
             if (h.operacion() == 1){
@@ -49,7 +48,6 @@ void Calculadora::ejecutar(Id idRutina){
                 JUMPZ(v);
             }
             i++;
-
         }
     }
 }
