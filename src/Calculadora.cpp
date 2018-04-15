@@ -44,9 +44,10 @@ void Calculadora::ejecutar(Id idRutina){
                 i = _programa.longitud(idRutina)+1;
                 JUMP(v);
             } else if (h.operacion() == 8){
-                if(_programa.esRutinaExistente(v)){
+                if(_programa.esRutinaExistente(v) and (pila[pila.size()] == 0 or pila.empty())){
                     JUMPZ(v);
-                } else {
+                    break;
+                } else if(!_programa.esRutinaExistente(v)){
                     i = _programa.longitud(idRutina)+1;
                 }
             }
