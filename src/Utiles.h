@@ -1,7 +1,6 @@
 #ifndef __UTILES_H__
 #define __UTILES_H__
 
-//typedef std::vector Programa;
 typedef int Operacion;
 
 const Operacion PUSH = 1;

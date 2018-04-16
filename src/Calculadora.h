@@ -121,7 +121,4 @@ private:
 
 };
 
-
-
-
 #endif /*__CALCULADORA_H__*/
